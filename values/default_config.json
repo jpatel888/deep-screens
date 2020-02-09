@@ -1,1 +1,58 @@
-{}
+{
+  "exp_name": "default",
+  "root_train_dir": "../data_loader/data/dummy/train/",
+  "root_test_dir": "../data_loader/data/dummy/test",
+  "image_extension": ".png",
+  "label_extension": ".json",
+  "do_train": true,
+  "do_test": true,
+  "do_deploy": false,
+  "num_epochs": 1000,
+  "num_classes": 4,
+  "dropout_rate": 0.2,
+  "num_iter_per_train_epoch": 50,
+  "num_iter_per_test_epoch": 50,
+  "learning_rate": 0.001,
+  "min_scalar": 0.9,
+  "batch_size": 16,
+  "num_defect_types": 5,
+  "input_shape": [1024, 1024, 3],
+  "output_shape_2d": [16, 16],
+  "conv_filters": [16, 32, 64, 64, 64, 64],
+  "conv_filter_size": 3,
+  "max_pooling_size": 2,
+  "do_save_model": true,
+  "num_models_to_save": 5,
+  "add_paths_to_system_PATH_var": ["/Users/zkv9z1o/homebrew/bin/"],
+  "anchor_boxes": [
+    {
+      "box_width": 1.19,
+      "box_height": 1.99
+    },
+    {
+      "box_width": 2.79,
+      "box_height": 4.60
+    },
+    {
+      "box_width": 4.54,
+      "box_height": 8.93
+    },
+    {
+      "box_width": 8.06,
+      "box_height": 5.29
+    },
+    {
+      "box_width": 10.33,
+      "box_height": 10.65
+    }
+  ],
+  "defect_types": [
+    "case",
+    "padding",
+    "color",
+    "font"
+  ],
+  "figure": {
+    "line_width": 3
+  }
+}

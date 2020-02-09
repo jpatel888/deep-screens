@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-class BaseTrain:
+class BaseRun:
     def __init__(self, sess, model, data, config, logger, figure):
         self.model = model
         self.logger = logger
@@ -19,13 +19,13 @@ class BaseTrain:
             self.test_epoch(cur_epoch) if self.config.do_test else print("Skipping Training")
             self.sess.run(self.model.increment_cur_epoch_tensor)
 
-    def train_epoch(self):
+    def train_epoch(self, epoch_num):
         raise NotImplementedError
 
     def train_step(self):
         raise NotImplementedError
 
-    def test_epoch(self):
+    def test_epoch(self, epoch_num):
         raise NotImplementedError
 
     def test_step(self):

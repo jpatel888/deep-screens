@@ -1,17 +1,20 @@
-import os
+import numpy as np
 
 
-def create_dirs(dirs):
-    """
-    dirs - a list of directories to create if these directories are not found
-    :param dirs:
-    :return exit_code: 0:success -1:failed
-    """
-    try:
-        for dir_ in dirs:
-            if not os.path.exists(dir_):
-                os.makedirs(dir_)
-        return 0
-    except Exception as err:
-        print("Creating directories error: {0}".format(err))
-        exit(-1)
+def split_images_by_depth(concatenated_images, image_depth=3):
+    assert concatenated_images.shape[2] % image_depth == 0
+    split_images = tuple(np.split(concatenated_images, concatenated_images.shape[2] / image_depth, axis=-1))
+    return split_images
+
+
+def stack_images_by_depth(list_of_images):
+    return np.concatenate(list_of_images, axis=-1)
+
+
+def concatenate_images_by_width(list_of_images):
+    return np.concatenate(list_of_images, axis=1)
+
+
+def concatenate_images_by_height(list_of_images):
+    return np.concatenate(list_of_images, axis=0)
+
