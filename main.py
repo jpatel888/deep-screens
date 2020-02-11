@@ -1,5 +1,5 @@
 from data_loader.data_generator import DataGenerator
-from models.ssd_model import SSDModel
+from models.ssd.ssd_model import SSDModel
 from runners.runner import Runner
 from figures.figure import Figure
 from deployers.tflite_converter import TFLiteConverter
@@ -8,7 +8,7 @@ from utils.utils import create_dirs
 from utils.logger import Logger
 from utils.utils import add_sys_paths
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior
+tf.disable_v2_behavior()
 
 
 def main():

@@ -43,7 +43,7 @@ class DataUtils:
                 [(root_data_dir + valid_train_date + "_(baseline)" + self.config.image_extension,
                   root_data_dir + valid_train_date + "_(current)" + self.config.image_extension)
                  for valid_train_date in self.valid_train_dates[data_pool]]
-            , dtype=object)
+                , dtype=object)
         return inputs
 
     def get_y(self):

@@ -10,9 +10,6 @@ class FeatureMapper(tf.keras.layers.Layer):
         self.m = (self.config.max_pooling_size, self.config.max_pooling_size)
         super(FeatureMapper, self).__init__()
 
-    def __call__(self, *args, **kwargs):
-        super(FeatureMapper, self).__call__(args, kwargs)
-
     def build(self, input_shape):
         """
         Build model layers sequentially and store as class variables

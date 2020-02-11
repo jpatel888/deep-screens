@@ -41,3 +41,10 @@ class DataGenerator:
         :return:
         """
         assert data_pool == 'train' or data_pool == 'test'
+
+
+if __name__ == '__main__':
+    from utils.config import get_config
+    from models.ssd.ssd_model import SSDModel
+    print(next(DataGenerator(get_config(), SSDModel(get_config())).next_batch(2)))
+

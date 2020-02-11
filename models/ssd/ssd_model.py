@@ -1,5 +1,5 @@
 from base.base_model import BaseModel
-from models.ssd_defect_detector import FeatureMapper
+from models.ssd.ssd_defect_detector import FeatureMapper
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
@@ -30,7 +30,7 @@ class SSDModel(BaseModel):
         input_shape = [self.config.batch_size] + self.config.input_shape
         self.input = tf.placeholder(tf.float32, shape=input_shape)
 
-    def build_model(self):
+    def define_model(self):
         """
         Builds and calls feature map layer for output
         :return: N/A
