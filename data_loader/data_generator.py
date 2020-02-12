@@ -3,9 +3,9 @@ import numpy as np
 
 
 class DataGenerator:
-    def __init__(self, config, model):
+    def __init__(self, config):
         self.config = config
-        self.data_utils = DataUtils(config, model)
+        self.data_utils = DataUtils(config)
         self.input = self.data_utils.get_input()
         self.y = self.data_utils.get_y()
 
@@ -41,10 +41,3 @@ class DataGenerator:
         :return:
         """
         assert data_pool == 'train' or data_pool == 'test'
-
-
-if __name__ == '__main__':
-    from utils.config import get_config
-    from models.ssd.ssd_model import SSDModel
-    print(next(DataGenerator(get_config(), SSDModel(get_config())).next_batch(2)))
-

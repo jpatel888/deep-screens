@@ -12,7 +12,7 @@ class BaseRun:
         self.init = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
         self.sess.run(self.init)
 
-    def train(self):
+    def train_and_test(self):
         for cur_epoch in range(self.model.cur_epoch_tensor.eval(self.sess), self.config.num_epochs + 1, 1):
             print("Running Epoch", cur_epoch)
             self.train_epoch(cur_epoch) if self.config.do_train else print("Skipping Training")

@@ -8,15 +8,12 @@ from bunch import bunchify
 
 
 class DataUtils:
-    def __init__(self, config, model):
+    def __init__(self, config):
         self.config = config
-        self.model_output_height = model.get_output_height
-        self.model_output_width = model.get_output_width
+        self.model_output_height, self.model_output_width, self.model_output_depth = tuple(self.config.model_output_size)
         self.augmenter = DataAugmenter(config)
-        self.model_output_depth = (self.config.num_classes + 5) * len(self.config.anchor_boxes)
         self.root_data_dirs = {"train": self.config.root_train_dir, "test": self.config.root_test_dir}
-        self.num_defect_categories = self.config.num_defect_categories
-        self.anchor_boxes = self.config.anchor_boxes
+        self.num_defect_categories = len(self.config.defect_types)
         self.valid_train_dates = {}
         self.get_valid_dates()
 

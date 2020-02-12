@@ -13,15 +13,15 @@ def get_config_from_json(config_file_path):
 
 def process_config(json_file_name):
     config, _ = get_config_from_json(json_file_name)
-    config.summary_dir = os.path.join("../experiments", config.exp_name, "summary/")
-    config.checkpoint_dir = os.path.join("../experiments", config.exp_name, "checkpoint/")
-    config.figure_dir = os.path.join("../experiments", config.exp_name, "generated_figures/")
+    config.summary_dir = os.path.join("./experiments", config.exp_name, "summary/")
+    config.checkpoint_dir = os.path.join("./experiments", config.exp_name, "checkpoint/")
+    config.figure_dir = os.path.join("./experiments", config.exp_name, "generated_figures/")
     return config
 
 
 def get_default_config():
     try:
-        return process_config("../values/default_config.json")
+        return process_config("./values/default_config.json")
     except json.decoder.JSONDecodeError:
         print("Error in JSON")
         exit(0)

@@ -52,7 +52,7 @@ class SSDModel(BaseModel):
         :return:
         """
         self.optimizer = tf.train.AdamOptimizer(self.config.learning_rate)
-        self.train_step = self.optimizer.minimize(self.loss, global_step=self.global_step_tensor)
+#        self.train_step = self.optimizer.minimize(self.loss, global_step=self.global_step_tensor)
 
     def init_saver(self):
         """
