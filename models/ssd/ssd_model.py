@@ -4,6 +4,18 @@ import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
 
+"""
+Post processor before pushing through loss:
+    last 4, sigmoid x & y outputs, exp(w & h outputs)
+    sigmoid first 5
+    
+Ready for figure
+
+Loss:
+    l2 on all
+"""
+
+
 class SSDModel(BaseModel):
     def __init__(self, config):
         super(SSDModel, self).__init__(config)

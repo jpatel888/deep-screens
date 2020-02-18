@@ -2,6 +2,7 @@ import os
 import imageio
 import numpy as np
 from data_loader.data_utils.data_augmenter import DataAugmenter
+from data_loader.data_utils.defect import Defects
 from collections import Counter
 from utils.utils import get_dict_from_json
 from bunch import bunchify
@@ -15,16 +16,16 @@ class DataUtils:
         self.root_data_dirs = {"train": self.config.root_train_dir, "test": self.config.root_test_dir}
         self.num_defect_categories = len(self.config.defect_types)
         self.valid_train_dates = {}
-        self.get_valid_dates()
+        self.set_valid_dates()
 
-    def get_valid_dates(self):
+    def set_valid_dates(self):
         """
         Sets a class variable to a list of valid date strings
             A valid date string is associated with three files
         :return: NA
         """
         for data_pool, root_data_dir in self.root_data_dirs.items():
-            all_train_timestamps = [file_name.split("_") for file_name in os.listdir(root_data_dir)]
+            all_train_timestamps = [file_name.split("_")[0] + "_" + file_name.split("_")[1] for file_name in os.listdir(root_data_dir)]
             train_timestamps_count = dict(Counter(all_train_timestamps))
             filtered_input_timestamps = {k: v for k, v in train_timestamps_count.items() if v == 3}
             self.valid_train_dates[data_pool] = list(filtered_input_timestamps.keys())
@@ -51,7 +52,7 @@ class DataUtils:
         ys = {}
         for data_pool, root_data_dir in self.root_data_dirs.items():
             ys[data_pool] = np.array(
-                [root_data_dir + valid_train_date + "_(label)" + self.config.image_extension
+                [root_data_dir + valid_train_date + "_(labels)" + self.config.label_extension
                  for valid_train_date in self.valid_train_dates[data_pool]]
                 , dtype=object)
         return ys
@@ -60,10 +61,9 @@ class DataUtils:
         batch_images, labels = [], []
         for input_path_pair, label_path in zip(input_paths, label_paths):
             input_image = DataUtils.input_paths_to_image_input(input_path_pair)
-            label = self.label_json_path_to_label(label_path)
-            input_name, label = self.augmenter(image=input_image, label=label)
-            batch_images.append(input_name)
-            labels.append(self.labels_json_to_grid(label))
+            label_json_bunch = self.label_json_path_to_label(label_path)
+            batch_images.append(input_image)
+            labels.append(self.labels_json_to_grid(label_json_bunch))
         return np.array(batch_images), np.array(labels)
 
     def get_grid_xy_indexes(self, label_grid, defect):
@@ -97,43 +97,17 @@ class DataUtils:
         )
         return max_iou_idx
 
-    def add_defect(self, label_grid, defect):
+    def labels_json_to_grid(self, label_json_bunch):
         """
-        places defect in label_grid and returns
-        :param label_grid: grid for feature map labels
-        :param defect: defect object in label json
-        :return:
-        """
-        grid_cell_width = self.config.input_shape[0] / label_grid.shape[0]
-        grid_cell_height = self.config.input_shape[1] / label_grid.shape[1]
-        defect.defect_id = self.config.defect.categories.index(defect.defect_type)
-        x_index, y_index = self.get_grid_xy_indexes(label_grid, defect)
-        anchor_box_index = self.get_anchor_box_index(defect)
-        x_delta = (grid_cell_width * (x_index + 0.5)) - defect.location[0]
-        y_delta = (grid_cell_height * (y_index + 0.5)) - defect.location[1]
-        width_delta = defect.location[2] / self.config.anchor_boxes[anchor_box_index].box_width
-        height_delta = defect.location[3] / self.config.anchor_boxse[anchor_box_index].box_height
-        confidence_idx, confidence = 0, 1
-        category_idx, category_value = defect.defect_id, 1
-        xywh = np.array([x_delta, y_delta, width_delta, height_delta])
-        base_index = (self.config.num_classes + 5) * anchor_box_index
-        label_grid[x_index, y_index, base_index + confidence_idx] = confidence
-        label_grid[x_index, y_index, base_index + category_idx] = category_value
-        label_grid[x_index, y_index, base_index + self.config.num_classes + 1: base_index + self.config.num_classes + 5] = xywh
-        return label_grid
-
-    def labels_json_to_grid(self, label):
-        """
-        TODO: Needs push multiple outputs to backprop every 2 layers
         Converts the label json into a feed_dict ready nd_array
         :param label: use conf. input size to reshape image and labels, augment data
         :return: list of 4D np.uint8 array of feature maps
         """
-        defects = label.defects
-        label_grid = np.zeros((self.model_output_width, self.model_output_height, self.model_output_depth))
-        for defect in defects:
-            label_grid = self.add_defect(label_grid, defect)
-        return label_grid
+        defects = label_json_bunch.defects
+        img_height = label_json_bunch.img_height
+        img_width = label_json_bunch.img_width
+        blank_grid = np.zeros((self.model_output_height, self.model_output_width, self.model_output_depth))
+        return Defects(self.config, defects, img_height, img_width).generate_grid(blank_grid)
 
     @staticmethod
     def input_paths_to_image_input(input_path_pair):

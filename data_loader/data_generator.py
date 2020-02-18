@@ -8,6 +8,7 @@ class DataGenerator:
         self.data_utils = DataUtils(config)
         self.input = self.data_utils.get_input()
         self.y = self.data_utils.get_y()
+        print(self.input, self.y)
 
     def roll_data_for_batch(self, batch_size, data_pool):
         """
@@ -16,8 +17,8 @@ class DataGenerator:
         :param data_pool:
         :return:
         """
-        self.input[data_pool] = np.roll(self.input, batch_size, axis=0)
-        self.y[data_pool] = np.roll(self.y, batch_size, axis=0)
+        self.input[data_pool] = np.roll(self.input[data_pool], batch_size, axis=0)
+        self.y[data_pool] = np.roll(self.y[data_pool], batch_size, axis=0)
 
     def next_batch(self, batch_size, data_pool='train'):
         """

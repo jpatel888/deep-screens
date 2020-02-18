@@ -29,6 +29,9 @@ class Figure(BaseFigure):
         self.config = config
         self.logger = logger
 
+    def draw_test(self, img, labels):
+        pass
+
     def draw_figure(self, data, step, summarizer="train", tag=""):
         """
         TODO: Add Box Draw Visualization:
