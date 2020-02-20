@@ -8,7 +8,7 @@ class DataGenerator:
         self.data_utils = DataUtils(config)
         self.input = self.data_utils.get_input()
         self.y = self.data_utils.get_y()
-        print(self.input, self.y)
+        #print(self.input, self.y)
 
     def roll_data_for_batch(self, batch_size, data_pool):
         """

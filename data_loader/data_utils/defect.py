@@ -18,7 +18,7 @@ class Defect:
         :param grid_height:
         :return:
         """
-        return self.defect_height / self.image_height * grid_height
+        return int(self.defect_midpoint_y / self.image_height * grid_height)
 
     def get_x_index(self, grid_width):
         """
@@ -26,7 +26,7 @@ class Defect:
         :param grid_width:
         :return:
         """
-        return self.defect_width / self.image_width * grid_width
+        return int(self.defect_midpoint_x / self.image_width * grid_width)
 
     def get_y(self, grid_height):
         """
@@ -44,7 +44,7 @@ class Defect:
         :param grid_width:
         :return:
         """
-        cell_width = self.image_height / grid_width
+        cell_width = self.image_width / grid_width
         x = (self.defect_midpoint_x % cell_width) / cell_width
         return x
 
@@ -63,21 +63,22 @@ class Defect:
         :param grid_width:
         :return:
         """
-        cell_width = self.image_height / grid_width
+        cell_width = self.image_width / grid_width
         w = self.defect_width / cell_width
         return w
 
     def add_to_grid(self, grid):
         grid_height, grid_width, grid_depth = grid.shape
         softmax_defects = self.to_softmax_bin(self.defect_type, self.all_defect_types).tolist()
-        y_idx = [self.get_y_index(grid_height)]
-        x_idx = [self.get_x_index(grid_width)]
+        y_idx = self.get_y_index(grid_height)
+        x_idx = self.get_x_index(grid_width)
         y = [self.get_y(grid_height)]
         x = [self.get_x(grid_width)]
         h = [self.get_h(grid_height)]
         w = [self.get_w(grid_width)]
         vector = np.array([1] + softmax_defects + y + x + h + w)
         grid[y_idx, x_idx] = vector
+        return grid
 
     @staticmethod
     def to_softmax_bin(el, el_list):
@@ -91,4 +92,5 @@ class Defects:
 
     def generate_grid(self, grid):
         for defect in self.defects:
-            defect.add_to_grid(grid)
+            grid = defect.add_to_grid(grid)
+        return grid

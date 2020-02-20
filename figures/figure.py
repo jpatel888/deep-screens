@@ -1,5 +1,7 @@
 from base.base_figure import BaseFigure
+from figures.image import Image
 import numpy as np
+import imageio
 
 
 class Figure(BaseFigure):
@@ -29,7 +31,9 @@ class Figure(BaseFigure):
         self.config = config
         self.logger = logger
 
-    def draw_test(self, img, labels):
+    def draw_test(self, img, label=None, logit=None):
+        image_obj = Image(self.config, img, label, logit)
+        imageio.imwrite("./testimgZ.png", image_obj.get_log_image())
         pass
 
     def draw_figure(self, data, step, summarizer="train", tag=""):
@@ -42,12 +46,8 @@ class Figure(BaseFigure):
         :return:
         """
         input_image, label_grid, logit_grid = data
-        # TODO: create three images from the
-        #       two (baseline and current):
-        #           1. Baseline
-        #           2. Current (with label_grid)
-        #           3. Current (with logit_grid)
-        #       append the images together by width
+        image_obj = Image(self.config, input_image, label_grid, logit_grid)
+        data = image_obj.get_log_image()
         if len(list(data.shape)) == 4:
             summaries_dict = {tag: data}
             self.logger.summarize(step, summarizer=summarizer, summaries_dict=summaries_dict)

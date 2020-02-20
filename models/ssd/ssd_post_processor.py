@@ -1,17 +1,22 @@
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-
+import tensorflow as tf
+tf.sigmoid
 
 class PostProcessor(tf.keras.layers.Layer):
     def __init__(self, config):
         self.config = config
         super(PostProcessor, self).__init__(config)
 
-    def build(self, input_shape):
-        pass
-
-    def call(self, box):
-        return box
+    def call(self, model_output):
+        """
+        Will first need to sigmoid [:, :, :7] so l2 can be applied to whole thing
+        :param model_output: 16 x 9 x 9 grid
+        :return:
+        """
+        first_seven, wh = model_output[:, :, :, :7], model_output[:, :, :, 7:]
+        first_seven = tf.sigmoid(first_seven)
+        return tf.concat((first_seven, wh), axis=-1)
 
     def output_ops(self, feature_mapper_output):
         """

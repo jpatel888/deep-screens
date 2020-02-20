@@ -1,5 +1,6 @@
 from base.base_model import BaseModel
 from models.ssd.ssd_defect_detector import FeatureMapper
+from models.ssd.ssd_post_processor import PostProcessor
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
@@ -24,7 +25,9 @@ class SSDModel(BaseModel):
         self.input = None
         self.y = None
         self.feature_mapper = None
+        self.post_processor = None
         self.model_output = None
+        self.post_processed = None
         self.loss = None
         self.optimizer = None
         self.train_step = None
@@ -48,7 +51,11 @@ class SSDModel(BaseModel):
         :return: N/A
         """
         self.feature_mapper = FeatureMapper(self.config)
+        self.post_processor = PostProcessor(self.config)
         self.model_output = self.feature_mapper(self.input)
+        print(self.model_output.shape)
+        self.post_processed = self.post_processor(self.model_output)
+        print(self.post_processed.shape)
 
     def define_loss(self):
         """
@@ -56,7 +63,7 @@ class SSDModel(BaseModel):
         :return: N/A
         """
         self.y = tf.placeholder(tf.float32, shape=self.model_output.shape)
-        self.loss = None  # TODO: Define loss for multiple feature maps
+        self.loss = tf.nn.l2_loss(self.post_processed - self.y)
 
     def define_optimizer(self):
         """
@@ -64,7 +71,7 @@ class SSDModel(BaseModel):
         :return:
         """
         self.optimizer = tf.train.AdamOptimizer(self.config.learning_rate)
-#        self.train_step = self.optimizer.minimize(self.loss, global_step=self.global_step_tensor)
+        self.train_step = self.optimizer.minimize(self.loss, global_step=self.global_step_tensor)
 
     def init_saver(self):
         """

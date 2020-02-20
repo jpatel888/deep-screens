@@ -11,6 +11,15 @@ import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
 
+config = get_config()
+data = DataGenerator(config)
+imgs, labels = next(data.next_batch(2))
+img, label = imgs[0], labels[0]
+sess = tf.Session()
+logger = Logger(sess, config)
+figure = Figure(config, logger)
+figure.draw_test(img, label=label)
+
 def main():
     config = get_config()
     create_dirs([config.summary_dir, config.checkpoint_dir, config.figure_dir])
@@ -20,6 +29,9 @@ def main():
     data = DataGenerator(config)
     logger = Logger(sess, config)
     figure = Figure(config, logger)
+    figure.draw_test(img, labels)
+    #print(next(data.next_batch(config.batch_size)))
+    exit()
     runner = Runner(sess, model, data, config, logger, figure)
     tflite_converter = TFLiteConverter(sess, model, config)
     model.load(sess)
@@ -27,5 +39,5 @@ def main():
     tflite_converter.convert()
 
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()

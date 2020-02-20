@@ -104,7 +104,7 @@ class DataUtils:
         :return: list of 4D np.uint8 array of feature maps
         """
         defects = label_json_bunch.defects
-        img_height = label_json_bunch.img_height
+        img_height = self.config.input_shape[0]
         img_width = label_json_bunch.img_width
         blank_grid = np.zeros((self.model_output_height, self.model_output_width, self.model_output_depth))
         return Defects(self.config, defects, img_height, img_width).generate_grid(blank_grid)
