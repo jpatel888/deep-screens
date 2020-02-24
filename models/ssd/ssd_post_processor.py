@@ -1,7 +1,6 @@
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-import tensorflow as tf
-tf.sigmoid
+
 
 class PostProcessor(tf.keras.layers.Layer):
     def __init__(self, config):
@@ -16,7 +15,6 @@ class PostProcessor(tf.keras.layers.Layer):
         """
         sigmoid_cross_entropy, xy, wh = model_output[:, :, :, :5], model_output[:, :, :, 5:7], model_output[:, :, :, 7:]
         xy = tf.sigmoid(xy)
-        #wh = tf.exp(wh)
         return tf.concat((sigmoid_cross_entropy, xy, wh), axis=-1)
 
     def output_ops(self, feature_mapper_output):

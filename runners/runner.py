@@ -13,7 +13,7 @@ class Runner(BaseRun):
         :param epoch_num: current iteration of all training data passed
         :return:
         """
-        loop = tqdm(range(self.config.num_iter_per_train_epoch), desc="Running Epoch" + str(epoch_num))
+        loop = tqdm(range(self.config.num_iter_per_train_epoch), desc="Running Train Epoch " + str(epoch_num))
         losses, l2_losses, sigmoid_losses = [], [], []
         for _ in loop:
             loss, l2_loss, sigmoid_loss, input_image, label, logit = self.train_step()
@@ -40,7 +40,7 @@ class Runner(BaseRun):
         :param epoch_num: current iteration of all training data passed
         :return:
         """
-        loop = tqdm(range(self.config.num_iter_per_test_epoch))
+        loop = tqdm(range(self.config.num_iter_per_test_epoch), desc="Running Test Epoch " + str(epoch_num))
         losses, l2_losses, sigmoid_losses = [], [], []
         for _ in loop:
             loss, l2_loss, sigmoid_loss, input_image, label, logit = self.test_step()
