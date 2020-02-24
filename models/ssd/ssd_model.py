@@ -40,6 +40,9 @@ class SSDModel(BaseModel):
         self.define_optimizer()
         self.init_saver()
 
+    def get_tflite_input_output_tensors(self):
+        return self.input, self.post_processed
+
     def define_input_placeholders(self):
         """
         defines input image placeholder, feature map placeholders will be generated with loss
@@ -68,12 +71,11 @@ class SSDModel(BaseModel):
         """
         self.y = tf.placeholder(tf.float32, shape=self.model_output.shape)
         y_cross_entropy, y_l2 = self.y[:, :, :, :5], self.y[:, :, :, 5:]
-        self.sigmoid_cross_entropy_loss = tf.nn.softmax_cross_entropy_with_logits_v2(
+        self.sigmoid_cross_entropy_loss = tf.nn.sigmoid_cross_entropy_with_logits(
             labels=y_cross_entropy,
             logits=self.post_processed[:, :, :, :5])
         difference = self.post_processed[:, :, :, 5:] - y_l2
         self.l2_loss = tf.reduce_sum(((difference * difference) / 2) * self.get_cost_mask())
-        print("l2 loss shape", self.l2_loss.shape)
         self.loss = (self.config.loss.l2_scalar * self.l2_loss) + (self.config.loss.sigmoid_scalar * tf.reduce_sum(self.sigmoid_cross_entropy_loss))
 
     def get_cost_mask(self):
@@ -85,7 +87,7 @@ class SSDModel(BaseModel):
         Define an optimizer to minimize loss
         :return:
         """
-        self.optimizer = tf.train.AdamOptimizer(self.config.learning_rate)
+        self.optimizer = tf.train.AdamOptimizer(self.config.learning_rate, beta1=self.config.beta1, beta2=self.config.beta2)
         self.train_step = self.optimizer.minimize(self.loss, global_step=self.global_step_tensor)
 
     def init_saver(self):

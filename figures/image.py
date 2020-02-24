@@ -24,8 +24,7 @@ class Image:
         try:
             mid_x = int((left_x + right_x) / 2)
             mid_y = int((top_y + bottom_y) / 2)
-            image[mid_y - line_width:mid_y + line_width, mid_x - line_width
-                                                         + mid_x + line_width] = color
+            image[mid_y - line_width:mid_y + line_width, mid_x - line_width + mid_x + line_width] = color
             image[top_y - line_width:top_y, left_x:right_x] = color
             image[top_y:bottom_y, left_x:left_x + line_width] = color
             image[bottom_y - line_width:bottom_y, left_x:right_x] = color

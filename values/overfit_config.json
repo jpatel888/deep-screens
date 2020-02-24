@@ -1,5 +1,5 @@
 {
-  "exp_name": "overfit",
+  "exp_name": "b2overfit2",
   "root_train_dir": "./data_loader/data/dummy/train/",
   "root_test_dir": "./data_loader/data/dummy/test/",
   "image_extension": ".jpg",
@@ -8,14 +8,16 @@
   "do_test": true,
   "do_deploy": false,
   "do_save_model": true,
-  "do_restore_model": true,
+  "do_restore_model": false,
   "num_epochs": 100000,
   "num_classes": 4,
   "dropout_rate": 0.2,
   "batch_size": 1,
   "num_iter_per_train_epoch": 1,
   "num_iter_per_test_epoch": 1,
-  "learning_rate": 0.0001,
+  "learning_rate": 0.001,
+  "beta1": 0.9,
+  "beta2": 0.999,
   "num_defect_types": 4,
   "input_shape": [2220, 1080, 6],
   "model_output_size": [30, 12, 9],
@@ -25,7 +27,7 @@
   "num_models_to_save": 5,
   "add_paths_to_system_PATH_var": ["~/homebrew/bin/"],
   "loss": {
-    "l2_scalar": 0,
+    "l2_scalar": 1,
     "sigmoid_scalar": 1
   },
   "defect_types": [

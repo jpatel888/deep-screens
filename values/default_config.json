@@ -16,6 +16,8 @@
   "num_iter_per_train_epoch": 2,
   "num_iter_per_test_epoch": 2,
   "learning_rate": 0.000001,
+  "beta1": 0.9,
+  "beta2": 0.999,
   "num_defect_types": 4,
   "input_shape": [2220, 1080, 6],
   "model_output_size": [30, 12, 9],
