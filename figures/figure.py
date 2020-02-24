@@ -36,6 +36,14 @@ class Figure(BaseFigure):
         imageio.imwrite("./testimgZ.png", image_obj.get_log_image())
         pass
 
+    def tf_log(self, data, step, summarizer, tag):
+        if len(list(data.shape)) == 4:
+            summaries_dict = {tag: data}
+            self.logger.summarize(step, summarizer=summarizer, summaries_dict=summaries_dict)
+        elif len(list(data.shape)) == 3:
+            summaries_dict = {tag: np.expand_dims(data, axis=0)}
+            self.logger.summarize(step, summarizer=summarizer, summaries_dict=summaries_dict)
+
     def draw_figure(self, data, step, summarizer="train", tag=""):
         """
         TODO: Add Box Draw Visualization:
@@ -48,9 +56,4 @@ class Figure(BaseFigure):
         input_image, label_grid, logit_grid = data
         image_obj = Image(self.config, input_image, label_grid, logit_grid)
         data = image_obj.get_log_image()
-        if len(list(data.shape)) == 4:
-            summaries_dict = {tag: data}
-            self.logger.summarize(step, summarizer=summarizer, summaries_dict=summaries_dict)
-        elif len(list(data.shape)) == 3:
-            summaries_dict = {tag: np.expand_dims(data, axis=0)}
-            self.logger.summarize(step, summarizer=summarizer, summaries_dict=summaries_dict)
+        self.tf_log(data, step, summarizer, "boxes")

@@ -20,7 +20,7 @@ class FeatureMapper(tf.keras.layers.Layer):
             self.layers.append(tf.keras.layers.Conv2D(kernel_size, self.c, activation=tf.nn.relu))
             self.layers.append(tf.keras.layers.MaxPooling2D(self.m, self.m))
             self.layers.append(tf.keras.layers.Dropout(self.config.dropout_rate))
-        self.layers.append(tf.keras.layers.Conv2D(self.config.conv_filters[-1], self.c))
+        self.layers.append(tf.keras.layers.Conv2D(self.config.conv_filters[-1], self.c, activation=None))
 
     def call(self, inputs):
         """

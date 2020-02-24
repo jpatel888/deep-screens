@@ -28,6 +28,8 @@ class SSDModel(BaseModel):
         self.post_processor = None
         self.model_output = None
         self.post_processed = None
+        self.sigmoid_cross_entropy_loss = None
+        self.l2_loss = None
         self.loss = None
         self.optimizer = None
         self.train_step = None
@@ -36,6 +38,7 @@ class SSDModel(BaseModel):
         self.define_model()
         self.define_loss()
         self.define_optimizer()
+        self.init_saver()
 
     def define_input_placeholders(self):
         """
@@ -59,11 +62,23 @@ class SSDModel(BaseModel):
 
     def define_loss(self):
         """
+        Add loss mask where has_defect != 1
         Define y placeholder(s) with feature map output as shape ref.
         :return: N/A
         """
         self.y = tf.placeholder(tf.float32, shape=self.model_output.shape)
-        self.loss = tf.nn.l2_loss(self.post_processed - self.y)
+        y_cross_entropy, y_l2 = self.y[:, :, :, :5], self.y[:, :, :, 5:]
+        self.sigmoid_cross_entropy_loss = tf.nn.softmax_cross_entropy_with_logits_v2(
+            labels=y_cross_entropy,
+            logits=self.post_processed[:, :, :, :5])
+        difference = self.post_processed[:, :, :, 5:] - y_l2
+        self.l2_loss = tf.reduce_sum(((difference * difference) / 2) * self.get_cost_mask())
+        print("l2 loss shape", self.l2_loss.shape)
+        self.loss = (self.config.loss.l2_scalar * self.l2_loss) + (self.config.loss.sigmoid_scalar * tf.reduce_sum(self.sigmoid_cross_entropy_loss))
+
+    def get_cost_mask(self):
+        has_defect = self.y[:, :, :, 0]
+        return tf.expand_dims(has_defect, axis=-1)
 
     def define_optimizer(self):
         """

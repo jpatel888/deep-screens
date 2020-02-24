@@ -10,13 +10,14 @@ class PostProcessor(tf.keras.layers.Layer):
 
     def call(self, model_output):
         """
-        Will first need to sigmoid [:, :, :7] so l2 can be applied to whole thing
+        sigmoid the x & y, exp the w and h
         :param model_output: 16 x 9 x 9 grid
         :return:
         """
-        first_seven, wh = model_output[:, :, :, :7], model_output[:, :, :, 7:]
-        first_seven = tf.sigmoid(first_seven)
-        return tf.concat((first_seven, wh), axis=-1)
+        sigmoid_cross_entropy, xy, wh = model_output[:, :, :, :5], model_output[:, :, :, 5:7], model_output[:, :, :, 7:]
+        xy = tf.sigmoid(xy)
+        #wh = tf.exp(wh)
+        return tf.concat((sigmoid_cross_entropy, xy, wh), axis=-1)
 
     def output_ops(self, feature_mapper_output):
         """

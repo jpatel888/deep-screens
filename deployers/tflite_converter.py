@@ -3,7 +3,7 @@ tf.disable_v2_behavior()
 
 
 class TFLiteConverter:
-    def __init__(self, sess, config, model):
+    def __init__(self, sess, model, config):
         self.sess = sess
         self.config = config
         self.model = model

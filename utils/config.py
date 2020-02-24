@@ -21,7 +21,7 @@ def process_config(json_file_name):
 
 def get_default_config():
     try:
-        return process_config("./values/default_config.json")
+        return process_config("./values/overfit_config.json")
     except json.decoder.JSONDecodeError:
         print("Error in JSON")
         exit(0)
