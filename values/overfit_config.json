@@ -1,5 +1,5 @@
 {
-  "exp_name": "b2overfit2",
+  "exp_name": "b2overfit_0_99",
   "root_train_dir": "./data_loader/data/dummy/train/",
   "root_test_dir": "./data_loader/data/dummy/test/",
   "image_extension": ".jpg",
