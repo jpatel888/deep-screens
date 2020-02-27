@@ -11,9 +11,9 @@ from bunch import bunchify
 class DataUtils:
     def __init__(self, config):
         self.config = config
-        self.model_output_height, self.model_output_width, self.model_output_depth = tuple(self.config.model_output_size)
+        self.model_output_height, self.model_output_width, self.model_output_depth = tuple(self.config.model.model_output_size)
         self.augmenter = DataAugmenter(config)
-        self.root_data_dirs = {"train": self.config.root_train_dir, "test": self.config.root_test_dir}
+        self.root_data_dirs = {"train": self.config.data.root_train_dir, "test": self.config.data.root_test_dir}
         self.num_defect_categories = len(self.config.defect_types)
         self.valid_train_dates = {}
         self.set_valid_dates()
@@ -38,8 +38,8 @@ class DataUtils:
         inputs = {}
         for data_pool, root_data_dir in self.root_data_dirs.items():
             inputs[data_pool] = np.array(
-                [(root_data_dir + valid_train_date + "_(baseline)" + self.config.image_extension,
-                  root_data_dir + valid_train_date + "_(current)" + self.config.image_extension)
+                [(root_data_dir + valid_train_date + "_(baseline)" + self.config.data.image_extension,
+                  root_data_dir + valid_train_date + "_(current)" + self.config.data.image_extension)
                  for valid_train_date in self.valid_train_dates[data_pool]]
                 , dtype=object)
         return inputs
@@ -52,7 +52,7 @@ class DataUtils:
         ys = {}
         for data_pool, root_data_dir in self.root_data_dirs.items():
             ys[data_pool] = np.array(
-                [root_data_dir + valid_train_date + "_(labels)" + self.config.label_extension
+                [root_data_dir + valid_train_date + "_(labels)" + self.config.data.label_extension
                  for valid_train_date in self.valid_train_dates[data_pool]]
                 , dtype=object)
         return ys
@@ -68,10 +68,10 @@ class DataUtils:
 
     def get_grid_xy_indexes(self, label_grid, defect):
         _loc_x = defect.location[0]
-        label_grid_cell_width = self.config.input_shape[0] / label_grid.shape[0]
+        label_grid_cell_width = self.config.model.input_shape[0] / label_grid.shape[0]
         defect_label_grid_x_index = int(_loc_x / label_grid_cell_width)
         _loc_y = defect.location[1]
-        label_grid_cell_height = self.config.input_shape[1] / label_grid.shape[1]
+        label_grid_cell_height = self.config.model.input_shape[1] / label_grid.shape[1]
         defect_label_grid_y_index = int(_loc_y / label_grid_cell_height)
         return defect_label_grid_x_index, defect_label_grid_y_index
 
@@ -104,7 +104,7 @@ class DataUtils:
         :return: list of 4D np.uint8 array of feature maps
         """
         defects = label_json_bunch.defects
-        img_height = self.config.input_shape[0]
+        img_height = self.config.model.input_shape[0]
         img_width = label_json_bunch.img_width
         blank_grid = np.zeros((self.model_output_height, self.model_output_width, self.model_output_depth))
         return Defects(self.config, defects, img_height, img_width).generate_grid(blank_grid)

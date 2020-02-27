@@ -13,7 +13,7 @@ class Runner(BaseRun):
         :param epoch_num: current iteration of all training data passed
         :return:
         """
-        loop = tqdm(range(self.config.num_iter_per_train_epoch), desc="Running Train Epoch " + str(epoch_num))
+        loop = tqdm(range(self.config.run.num_iter_per_train_epoch), desc="Running Train Epoch " + str(epoch_num))
         losses, l2_losses, sigmoid_losses = [], [], []
         for _ in loop:
             loss, l2_loss, sigmoid_loss, input_image, label, logit = self.train_step()
@@ -40,7 +40,7 @@ class Runner(BaseRun):
         :param epoch_num: current iteration of all training data passed
         :return:
         """
-        loop = tqdm(range(self.config.num_iter_per_test_epoch), desc="Running Test Epoch " + str(epoch_num))
+        loop = tqdm(range(self.config.run.num_iter_per_test_epoch), desc="Running Test Epoch " + str(epoch_num))
         losses, l2_losses, sigmoid_losses = [], [], []
         for _ in loop:
             loss, l2_loss, sigmoid_loss, input_image, label, logit = self.test_step()
@@ -66,7 +66,7 @@ class Runner(BaseRun):
         Runs one step of training
         :return: loss, input image, and model output
         """
-        batch_x, batch_y = next(self.data.next_batch(self.config.batch_size, 'train'))
+        batch_x, batch_y = next(self.data.next_batch(self.config.model.batch_size, 'train'))
         feed_dict = {self.model.input: batch_x, self.model.y: batch_y}
         optimizer, loss, l2_loss, sigmoid_loss, results = self.sess.run([self.model.train_step,
                                                                          self.model.loss,
@@ -81,7 +81,7 @@ class Runner(BaseRun):
         Runs one step of testing
         :return: loss, input_image, model output
         """
-        batch_x, batch_y = next(self.data.next_batch(self.config.batch_size, 'test'))
+        batch_x, batch_y = next(self.data.next_batch(self.config.model.batch_size, 'test'))
         feed_dict = {self.model.input: batch_x, self.model.y: batch_y}
         loss, l2_loss, sigmoid_loss, results = self.sess.run([self.model.loss,
                                                               self.model.l2_loss,

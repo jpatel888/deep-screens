@@ -34,10 +34,10 @@ class Image:
         return image
 
     def get_bounding_box(self, y_idx, x_idx, yxhw):
-        num_grid_cells_width = self.config.model_output_size[1]
-        num_grid_cells_height = self.config.model_output_size[0]
-        image_width = self.config.input_shape[1]
-        image_height = self.config.input_shape[0]
+        num_grid_cells_width = self.config.model.model_output_size[1]
+        num_grid_cells_height = self.config.model.model_output_size[0]
+        image_width = self.config.model.input_shape[1]
+        image_height = self.config.model.input_shape[0]
         grid_cell_width = image_width / num_grid_cells_width
         grid_cell_height = image_height / num_grid_cells_height
         my, mx, h, w = yxhw[0], yxhw[1], yxhw[2], yxhw[3]

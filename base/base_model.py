@@ -9,14 +9,14 @@ class BaseModel:
         self.init_current_epoch()
 
     def save(self, sess):
-        if self.config.do_save_model:
+        if self.config.run.do_save_model:
             print("Saving model...")
             self.saver.save(sess, self.config.checkpoint_dir, self.global_step_tensor)
             print("Model saved")
 
     def load(self, sess):
         latest_checkpoint = tf.train.latest_checkpoint(self.config.checkpoint_dir)
-        if latest_checkpoint and self.config.do_restore_model:
+        if latest_checkpoint and self.config.run.do_restore_model:
             print("Loading model checkpoint {} ...\n".format(latest_checkpoint))
             self.saver.restore(sess, latest_checkpoint)
             print("Model Loaded")

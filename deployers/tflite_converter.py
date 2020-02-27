@@ -14,7 +14,7 @@ class TFLiteConverter:
             deployable tflite file
         :return: N/A
         """
-        if not self.config.do_deploy:
+        if not self.config.run.do_deploy:
             return print("Skipping Deployment")
         in_tensors, out_tensors = self.model.get_tflite_input_output_tensors()
         converter = tf.lite.TFLiteConverter.from_session(self.sess, in_tensors, out_tensors)

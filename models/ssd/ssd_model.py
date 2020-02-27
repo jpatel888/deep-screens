@@ -5,18 +5,6 @@ import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
 
-"""
-Post processor before pushing through loss:
-    last 4, sigmoid x & y outputs, exp(w & h outputs)
-    sigmoid first 5
-    
-Ready for figure
-
-Loss:
-    l2 on all
-"""
-
-
 class SSDModel(BaseModel):
     def __init__(self, config):
         super(SSDModel, self).__init__(config)
@@ -48,7 +36,7 @@ class SSDModel(BaseModel):
         defines input image placeholder, feature map placeholders will be generated with loss
         :return: N/A
         """
-        input_shape = [self.config.batch_size] + self.config.input_shape
+        input_shape = [self.config.model.batch_size] + self.config.model.input_shape
         self.input = tf.placeholder(tf.float32, shape=input_shape)
 
     def define_model(self):
@@ -59,9 +47,7 @@ class SSDModel(BaseModel):
         self.feature_mapper = FeatureMapper(self.config)
         self.post_processor = PostProcessor(self.config)
         self.model_output = self.feature_mapper(self.input)
-        print(self.model_output.shape)
         self.post_processed = self.post_processor(self.model_output)
-        print(self.post_processed.shape)
 
     def define_loss(self):
         """
@@ -87,7 +73,7 @@ class SSDModel(BaseModel):
         Define an optimizer to minimize loss
         :return:
         """
-        self.optimizer = tf.train.AdamOptimizer(self.config.learning_rate, beta1=self.config.beta1, beta2=self.config.beta2)
+        self.optimizer = tf.train.AdamOptimizer(self.config.model.learning_rate, beta1=self.config.model.beta1, beta2=self.config.model.beta2)
         self.train_step = self.optimizer.minimize(self.loss, global_step=self.global_step_tensor)
 
     def init_saver(self):
@@ -95,4 +81,4 @@ class SSDModel(BaseModel):
         Initialize saver to store last n iterations of training, n is defined in config
         :return:
         """
-        self.saver = tf.train.Saver(max_to_keep=self.config.num_models_to_save)
+        self.saver = tf.train.Saver(max_to_keep=self.config.model.num_models_to_save)
