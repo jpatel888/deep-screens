@@ -1,33 +1,36 @@
 {
   "exp_name": "default",
-  "root_train_dir": "./data_loader/data/dummy/train/",
-  "root_test_dir": "./data_loader/data/dummy/test/",
-  "image_extension": ".jpg",
-  "label_extension": ".json",
-  "do_train": true,
-  "do_test": true,
-  "do_deploy": false,
-  "do_save_model": true,
-  "do_restore_model": false,
-  "num_epochs": 100000,
-  "num_classes": 4,
-  "dropout_rate": 0.2,
-  "batch_size": 2,
-  "num_iter_per_train_epoch": 2,
-  "num_iter_per_test_epoch": 2,
-  "learning_rate": 0.000001,
-  "beta1": 0.9,
-  "beta2": 0.999,
-  "num_defect_types": 4,
-  "input_shape": [2220, 1080, 6],
-  "model_output_size": [30, 12, 9],
-  "conv_filters": [16, 16, 24, 24, 32, 9],
-  "conv_filter_size": 3,
-  "max_pooling_size": 2,
-  "num_models_to_save": 5,
-  "add_paths_to_system_PATH_var": ["~/homebrew/bin/"],
+  "data": {
+    "root_train_dir": "./data_loader/data/dummy/train/",
+    "root_test_dir": "./data_loader/data/dummy/test/",
+    "image_extension": ".jpg",
+    "label_extension": ".json"
+  },
+  "run": {
+    "do_train": true,
+    "do_test": true,
+    "do_deploy": false,
+    "do_save_model": true,
+    "do_restore_model": false,
+    "num_epochs": 100000,
+    "num_iter_per_train_epoch": 1,
+    "num_iter_per_test_epoch": 1
+  },
+  "model": {
+    "dropout_rate": 0.2,
+    "batch_size": 1,
+    "learning_rate": 0.001,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "input_shape": [2220, 1080, 6],
+    "model_output_size": [30, 12, 9],
+    "conv_filters": [16, 16, 24, 24, 32, 9],
+    "conv_filter_size": 3,
+    "max_pooling_size": 2,
+    "num_models_to_save": 5
+  },
   "loss": {
-    "l2_scalar": 0,
+    "l2_scalar": 1,
     "sigmoid_scalar": 1
   },
   "defect_types": [
@@ -44,5 +47,6 @@
       [79, 244, 20],
       [189, 35, 6]
     ]
-  }
+  },
+  "add_paths_to_system_PATH_var": ["~/homebrew/bin/"]
 }

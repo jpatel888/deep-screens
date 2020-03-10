@@ -19,4 +19,4 @@ class TFLiteConverter:
         in_tensors, out_tensors = self.model.get_tflite_input_output_tensors()
         converter = tf.lite.TFLiteConverter.from_session(self.sess, in_tensors, out_tensors)
         tflite_model = converter.convert()
-        open(self.config.exp_name + ".tflite", "wb").write(tflite_model)
+        open(self.config.tflite_dir + self.config.exp_name + ".tflite", "wb").write(tflite_model)

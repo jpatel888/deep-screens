@@ -16,17 +16,18 @@ def process_config(json_file_name):
     config.summary_dir = os.path.join("./experiments", config.exp_name, "summary/")
     config.checkpoint_dir = os.path.join("./experiments", config.exp_name, "checkpoint/")
     config.figure_dir = os.path.join("./experiments", config.exp_name, "generated_figures/")
+    config.tflite_dir = os.path.join("./experiments", config.exp_name, "tflite/")
     return config
 
 
 def get_default_config():
     try:
-        return process_config("./values/overfit_config.json")
+        return process_config("./values/default_config.json")
     except json.decoder.JSONDecodeError:
         print("Error in JSON")
         exit(0)
-    except:
-        print("error in config")
+    except Exception as exception:
+        print("Error in fetching config:", exception)
         exit(0)
 
 
