@@ -5,7 +5,7 @@ import cv2
 class DataAugmenter:
     def __init__(self, config):
         self.config = config
-        self.image_input_shape = self.config.input_shape
+        self.image_input_shape = self.config.model.input_shape
 
     def __call__(self, *args, **kwargs):
         """

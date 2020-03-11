@@ -7,11 +7,15 @@ class PostProcessor(tf.keras.layers.Layer):
         self.config = config
         super(PostProcessor, self).__init__(config)
 
-    def build(self, input_shape):
-        pass
-
-    def call(self, box):
-        return box
+    def call(self, model_output):
+        """
+        sigmoid the x & y, exp the w and h
+        :param model_output: 16 x 9 x 9 grid
+        :return:
+        """
+        sigmoid_cross_entropy, xy, wh = model_output[:, :, :, :5], model_output[:, :, :, 5:7], model_output[:, :, :, 7:]
+        xy = tf.sigmoid(xy)
+        return tf.concat((sigmoid_cross_entropy, xy, wh), axis=-1)
 
     def output_ops(self, feature_mapper_output):
         """

@@ -2,3 +2,5 @@
 *.idea*
 *__pycache__*
 data_loader/data/*
+*experiments/*
+*.pyc

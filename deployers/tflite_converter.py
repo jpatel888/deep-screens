@@ -3,7 +3,7 @@ tf.disable_v2_behavior()
 
 
 class TFLiteConverter:
-    def __init__(self, sess, config, model):
+    def __init__(self, sess, model, config):
         self.sess = sess
         self.config = config
         self.model = model
@@ -14,9 +14,9 @@ class TFLiteConverter:
             deployable tflite file
         :return: N/A
         """
-        if not self.config.do_deploy:
+        if not self.config.run.do_deploy:
             return print("Skipping Deployment")
         in_tensors, out_tensors = self.model.get_tflite_input_output_tensors()
         converter = tf.lite.TFLiteConverter.from_session(self.sess, in_tensors, out_tensors)
         tflite_model = converter.convert()
-        open(self.config.exp_name + ".tflite", "wb").write(tflite_model)
+        open(self.config.tflite_dir + self.config.exp_name + ".tflite", "wb").write(tflite_model)
