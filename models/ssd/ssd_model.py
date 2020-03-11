@@ -29,7 +29,7 @@ class SSDModel(BaseModel):
         self.init_saver()
 
     def get_tflite_input_output_tensors(self):
-        return self.input, self.post_processed
+        return [self.input], [self.post_processed]
 
     def define_input_placeholders(self):
         """

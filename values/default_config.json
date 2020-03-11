@@ -1,5 +1,5 @@
 {
-  "exp_name": "default",
+  "exp_name": "default2",
   "data": {
     "root_train_dir": "./data_loader/data/dummy/train/",
     "root_test_dir": "./data_loader/data/dummy/test/",
@@ -9,10 +9,10 @@
   "run": {
     "do_train": true,
     "do_test": true,
-    "do_deploy": false,
+    "do_deploy": true,
     "do_save_model": true,
     "do_restore_model": false,
-    "num_epochs": 100000,
+    "num_epochs": 2,
     "num_iter_per_train_epoch": 1,
     "num_iter_per_test_epoch": 1
   },
