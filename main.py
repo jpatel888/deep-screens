@@ -17,7 +17,7 @@ def main():
     configs = get_configs()
     for config in configs:
         print("Running Config:", config.exp_name)
-        create_dirs([config.summary_dir, config.checkpoint_dir, config.figure_dir])
+        create_dirs([config.summary_dir, config.checkpoint_dir, config.figure_dir, config.tflite_dir])
         add_sys_paths(config.add_paths_to_system_PATH_var)
         sess = tf.Session()
         model = SSDModel(config)

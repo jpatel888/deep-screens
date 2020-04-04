@@ -1,5 +1,5 @@
 {
-  "exp_name": "default2",
+  "exp_name": "default",
   "data": {
     "root_train_dir": "./data_loader/data/dummy/train/",
     "root_test_dir": "./data_loader/data/dummy/test/",
@@ -12,12 +12,13 @@
     "do_deploy": true,
     "do_save_model": true,
     "do_restore_model": false,
-    "num_epochs": 2,
+    "num_epochs": 1,
     "num_iter_per_train_epoch": 1,
     "num_iter_per_test_epoch": 1
   },
   "model": {
     "dropout_rate": 0.2,
+    "dropout_seed": 23248,
     "batch_size": 1,
     "learning_rate": 0.001,
     "beta1": 0.9,
