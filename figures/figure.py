@@ -24,4 +24,4 @@ class Figure(BaseFigure):
         input_image, label_grid, logit_grid = data
         image_obj = Image(self.config, input_image, label_grid, logit_grid)
         data = image_obj.get_log_image()
-        self.tf_log(data, step, summarizer, "boxes")
+        self.tf_log(data, step, summarizer, self.config.exp_name + "_boxes")

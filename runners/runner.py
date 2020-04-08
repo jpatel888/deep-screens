@@ -25,9 +25,9 @@ class Runner(BaseRun):
         sigmoid_loss = np.mean(sigmoid_losses)
         cur_it = self.model.global_step_tensor.eval(self.sess)
         summaries_dict = {
-            'loss': loss,
-            'l2_loss': l2_loss,
-            'sigmoid_loss': sigmoid_loss
+            self.config.exp_name + '_loss': loss,
+            self.config.exp_name + '_l2_loss': l2_loss,
+            self.config.exp_name + '_sigmoid_loss': sigmoid_loss
         }
         if epoch_num % 1 == 0:
             self.figure.draw_figure((input_image, label, logit), cur_it, summarizer="train", tag="images")
@@ -52,9 +52,9 @@ class Runner(BaseRun):
         sigmoid_loss = np.mean(sigmoid_losses)
         cur_it = self.model.global_step_tensor.eval(self.sess)
         summaries_dict = {
-            'loss': loss,
-            'l2_loss': l2_loss,
-            'sigmoid_loss': sigmoid_loss
+            self.config.exp_name + '_loss': loss,
+            self.config.exp_name + '_l2_loss': l2_loss,
+            self.config.exp_name + '_sigmoid_loss': sigmoid_loss
         }
         if epoch_num % 1 == 0:
             self.figure.draw_figure((input_image, label, logit), cur_it, summarizer="test", tag="images")

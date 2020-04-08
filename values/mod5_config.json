@@ -1,0 +1,53 @@
+{
+  "exp_name": "mod5",
+  "data": {
+    "root_train_dir": "./data_loader/data/train/",
+    "root_test_dir": "./data_loader/data/test/",
+    "image_extension": ".jpg",
+    "label_extension": ".json"
+  },
+  "run": {
+    "do_train": true,
+    "do_test": true,
+    "do_deploy": true,
+    "do_save_model": true,
+    "do_restore_model": true,
+    "num_epochs": 500,
+    "num_iter_per_train_epoch": 250,
+    "num_iter_per_test_epoch": 250
+  },
+  "model": {
+    "dropout_rate": 0.2,
+    "dropout_seed": 23248,
+    "batch_size": 50,
+    "learning_rate": 0.001,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "input_shape": [2220, 1080, 6],
+    "model_output_size": [30, 12, 9],
+    "conv_filters": [24, 24, 32, 32, 64, 9],
+    "conv_filter_size": 3,
+    "max_pooling_size": 2,
+    "num_models_to_save": 5
+  },
+  "loss": {
+    "l2_scalar": 1,
+    "sigmoid_scalar": 1
+  },
+  "defect_types": [
+    "_case",
+    "_padding",
+    "_color",
+    "_font"
+  ],
+  "figure": {
+    "line_width": 5,
+    "color_map": [
+      [23, 155, 94],
+      [210, 8, 123],
+      [79, 244, 20],
+      [189, 35, 6]
+    ]
+  },
+  "add_paths_to_system_PATH_var": ["~/homebrew/bin/"]
+}

@@ -1,8 +1,8 @@
 {
-  "exp_name": "default",
+  "exp_name": "mod2",
   "data": {
-    "root_train_dir": "./data_loader/data/dummy/train/",
-    "root_test_dir": "./data_loader/data/dummy/test/",
+    "root_train_dir": "./data_loader/data/train/",
+    "root_test_dir": "./data_loader/data/test/",
     "image_extension": ".jpg",
     "label_extension": ".json"
   },
@@ -11,21 +11,21 @@
     "do_test": true,
     "do_deploy": true,
     "do_save_model": true,
-    "do_restore_model": false,
-    "num_epochs": 10000,
-    "num_iter_per_train_epoch": 1,
-    "num_iter_per_test_epoch": 1
+    "do_restore_model": true,
+    "num_epochs": 500,
+    "num_iter_per_train_epoch": 250,
+    "num_iter_per_test_epoch": 250
   },
   "model": {
     "dropout_rate": 0.2,
     "dropout_seed": 23248,
-    "batch_size": 1,
+    "batch_size": 50,
     "learning_rate": 0.001,
     "beta1": 0.9,
     "beta2": 0.999,
     "input_shape": [2220, 1080, 6],
     "model_output_size": [30, 12, 9],
-    "conv_filters": [16, 16, 24, 24, 32, 9],
+    "conv_filters": [16, 16, 24, 24, 24, 9],
     "conv_filter_size": 3,
     "max_pooling_size": 2,
     "num_models_to_save": 5
