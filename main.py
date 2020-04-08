@@ -19,7 +19,9 @@ def main():
         print("Running Config:", config.exp_name)
         create_dirs([config.summary_dir, config.checkpoint_dir, config.figure_dir, config.tflite_dir])
         add_sys_paths(config.add_paths_to_system_PATH_var)
-        sess = tf.Session()
+        tfconfig = tf.ConfigProto()
+        tfconfig.gpu_options.allow_growth = True
+        sess = tf.Session(config=tfconfig)
         model = SSDModel(config)
         data = DataGenerator(config)
         logger = Logger(sess, config)
