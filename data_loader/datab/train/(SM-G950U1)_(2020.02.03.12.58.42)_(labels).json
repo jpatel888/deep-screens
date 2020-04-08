@@ -1,0 +1,240 @@
+{
+  "activity_name": "MainActivity",
+  "defects": [
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 54,
+        "midpoint_x": 879,
+        "midpoint_y": 120,
+        "width": 54
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 70,
+        "midpoint_x": 134,
+        "midpoint_y": 360,
+        "width": 172
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 33,
+        "midpoint_x": 407,
+        "midpoint_y": 359,
+        "width": 182
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 33,
+        "midpoint_x": 654,
+        "midpoint_y": 359,
+        "width": 80
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 45,
+        "midpoint_x": 937,
+        "midpoint_y": 359,
+        "width": 255
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 141,
+        "midpoint_x": 292,
+        "midpoint_y": 486,
+        "width": 393
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 115,
+        "midpoint_x": 358,
+        "midpoint_y": 748,
+        "width": 525
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 107,
+        "midpoint_x": 326,
+        "midpoint_y": 922,
+        "width": 461
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 117,
+        "midpoint_x": 247,
+        "midpoint_y": 1046,
+        "width": 302
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 89,
+        "midpoint_x": 909,
+        "midpoint_y": 1060,
+        "width": 149
+      },
+      "view_name": "Button"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 69,
+        "midpoint_x": 326,
+        "midpoint_y": 1214,
+        "width": 460
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 78,
+        "midpoint_x": 170,
+        "midpoint_y": 1300,
+        "width": 148
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 75,
+        "midpoint_x": 901,
+        "midpoint_y": 1301,
+        "width": 166
+      },
+      "view_name": "Button"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 46,
+        "midpoint_x": 348,
+        "midpoint_y": 1437,
+        "width": 504
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 151,
+        "midpoint_x": 253,
+        "midpoint_y": 1547,
+        "width": 315
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 101,
+        "midpoint_x": 885,
+        "midpoint_y": 1572,
+        "width": 197
+      },
+      "view_name": "Button"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 142,
+        "midpoint_x": 448,
+        "midpoint_y": 1769,
+        "width": 704
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 133,
+        "midpoint_x": 274,
+        "midpoint_y": 1918,
+        "width": 356
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 115,
+        "midpoint_x": 901,
+        "midpoint_y": 1927,
+        "width": 165
+      },
+      "view_name": "Button"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 46,
+        "midpoint_x": 349,
+        "midpoint_y": 2083,
+        "width": 507
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 78,
+        "midpoint_x": 242,
+        "midpoint_y": 2157,
+        "width": 293
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_padding",
+      "location": {
+        "height": 87,
+        "midpoint_x": 900,
+        "midpoint_y": 2102,
+        "width": 258
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 58,
+        "midpoint_x": 990,
+        "midpoint_y": 1810,
+        "width": 90
+      },
+      "view_name": "TextView"
+    }
+  ],
+  "device_name": "SM-G950U1",
+  "img_height": 2175,
+  "img_width": 1080,
+  "os_version": "android : 9 : P : sdk\u003d28",
+  "scroll_position": 263
+}

@@ -1,0 +1,100 @@
+{
+  "activity_name": "MobileHomePageActivity",
+  "defects": [
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 64,
+        "midpoint_x": 532,
+        "midpoint_y": 156,
+        "width": 238
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 1535,
+        "midpoint_x": 540,
+        "midpoint_y": 634,
+        "width": 930
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 127,
+        "midpoint_y": 1819,
+        "width": 194
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 144,
+        "midpoint_y": 1903,
+        "width": 229
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 484,
+        "midpoint_y": 1903,
+        "width": 271
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 185,
+        "midpoint_y": 1987,
+        "width": 311
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 601,
+        "midpoint_y": 1987,
+        "width": 341
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 266,
+        "midpoint_y": 2086,
+        "width": 472
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 267,
+        "midpoint_y": 2125,
+        "width": 474
+      },
+      "view_name": "TextView"
+    }
+  ],
+  "device_name": "SM-G950U1",
+  "img_height": 2175,
+  "img_width": 1080,
+  "os_version": "android : 9 : P : sdk\u003d28",
+  "scroll_position": 4025
+}

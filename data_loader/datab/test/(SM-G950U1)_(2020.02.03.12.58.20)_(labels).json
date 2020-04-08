@@ -1,0 +1,60 @@
+{
+  "activity_name": "MobileHomePageActivity",
+  "defects": [
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 64,
+        "midpoint_x": 532,
+        "midpoint_y": 156,
+        "width": 238
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 1535,
+        "midpoint_x": 540,
+        "midpoint_y": 867,
+        "width": 930
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 127,
+        "midpoint_y": 2052,
+        "width": 194
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 144,
+        "midpoint_y": 2136,
+        "width": 229
+      },
+      "view_name": "TextView"
+    },
+    {
+      "defect_type": "_color",
+      "location": {
+        "height": 39,
+        "midpoint_x": 484,
+        "midpoint_y": 2136,
+        "width": 271
+      },
+      "view_name": "TextView"
+    }
+  ],
+  "device_name": "SM-G950U1",
+  "img_height": 2175,
+  "img_width": 1080,
+  "os_version": "android : 9 : P : sdk\u003d28",
+  "scroll_position": 2245
+}
