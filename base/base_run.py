@@ -13,7 +13,7 @@ class BaseRun:
         self.sess.run(self.init)
 
     def train_and_test(self):
-        for cur_epoch in range(self.model.cur_epoch_tensor.eval(self.sess), self.config.run.num_epochs + 1, 1):
+        for cur_epoch in range(self.model.cur_epoch_tensor.eval(self.sess), self.config.run.num_epochs, 1):
             self.train_epoch(cur_epoch) if self.config.run.do_train else print("Skipping Training")
             self.test_epoch(cur_epoch) if self.config.run.do_test else print("Skipping Training")
             self.sess.run(self.model.increment_cur_epoch_tensor)

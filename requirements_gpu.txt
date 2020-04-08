@@ -1,5 +1,4 @@
-tensorflow==1.14.0
-tensorboard==1.14.0
+tensorflow-gpu==1.15
 numpy==1.18.1
 opencv-python==3.4.4.19
 bunch==1.0.1

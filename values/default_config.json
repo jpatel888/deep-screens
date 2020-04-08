@@ -12,7 +12,7 @@
     "do_deploy": true,
     "do_save_model": true,
     "do_restore_model": false,
-    "num_epochs": 1,
+    "num_epochs": 10000,
     "num_iter_per_train_epoch": 1,
     "num_iter_per_test_epoch": 1
   },

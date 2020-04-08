@@ -23,10 +23,16 @@ def process_configs(json_file_names):
     return configs
 
 
+def get_all_available_configs():
+    all_config_paths = [path for path in os.listdir("values") if path.endswith("config.json")]
+    return all_config_paths
+
+
 def get_default_configs():
-    print("Couldn't get config params or none provided, using default")
+    print("Couldn't get config params or none provided, running all configs in configs/ sequentially")
+    all_config_paths = get_all_available_configs()
     try:
-        return process_configs(["default_config.json"])
+        return process_configs(all_config_paths)
     except json.decoder.JSONDecodeError:
         print("Error in JSON")
         exit(0)
