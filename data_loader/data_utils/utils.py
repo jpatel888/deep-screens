@@ -100,7 +100,7 @@ class DataUtils:
     def labels_json_to_grid(self, label_json_bunch):
         """
         Converts the label json into a feed_dict ready nd_array
-        :param label: use conf. input size to reshape image and labels, augment data
+        :param label: use conf. input size to reshape image and labels, augment datab
         :return: list of 4D np.uint8 array of feature maps
         """
         defects = label_json_bunch.defects

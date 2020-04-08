@@ -77,7 +77,10 @@ class Defect:
         h = [self.get_h(grid_height)]
         w = [self.get_w(grid_width)]
         vector = np.array([1] + softmax_defects + y + x + h + w)
-        grid[y_idx, x_idx] = vector
+        try:
+            grid[y_idx, x_idx] = vector
+        except Exception:
+            print("Couldn't add to grid, probably out of bounds")
         return grid
 
     @staticmethod
