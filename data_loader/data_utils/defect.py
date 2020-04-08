@@ -80,7 +80,7 @@ class Defect:
         try:
             grid[y_idx, x_idx] = vector
         except Exception:
-            print("Couldn't add to grid, probably out of bounds")
+            pass  # print("Couldn't add to grid, probably out of bounds")
         return grid
 
     @staticmethod
