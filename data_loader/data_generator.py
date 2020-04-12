@@ -8,7 +8,12 @@ class DataGenerator:
         self.data_utils = DataUtils(config)
         self.input = self.data_utils.get_input()
         self.y = self.data_utils.get_y()
-        #print(self.input, self.y)
+        self.prepare_dataset()
+
+    def prepare_dataset(self):
+        assert self.input.keys() == self.y.keys()
+        for k, _ in self.input.items():
+            self.input[k], self.y[k] = self.data_utils.prepare_batch(self.input[k], self.y[k], k)
 
     def roll_data_for_batch(self, batch_size, data_pool):
         """
@@ -31,7 +36,7 @@ class DataGenerator:
         self.roll_data_for_batch(batch_size, data_pool)
         batch_input = self.input[data_pool][:batch_size]
         batch_y = self.y[data_pool][:batch_size]
-        batch = self.data_utils.prepare_batch(batch_input, batch_y)
+        batch = (batch_input, batch_y)
         yield batch
 
     @staticmethod

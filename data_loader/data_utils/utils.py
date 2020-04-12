@@ -6,6 +6,7 @@ from data_loader.data_utils.defect import Defects
 from collections import Counter
 from utils.utils import get_dict_from_json
 from bunch import bunchify
+from tqdm import tqdm
 
 
 class DataUtils:
@@ -57,9 +58,9 @@ class DataUtils:
                 , dtype=object)
         return ys
 
-    def prepare_batch(self, input_paths, label_paths):
+    def prepare_batch(self, input_paths, label_paths, data_pool):
         batch_images, labels = [], []
-        for input_path_pair, label_path in zip(input_paths, label_paths):
+        for input_path_pair, label_path in tqdm(list(zip(input_paths, label_paths))):
             input_image = DataUtils.input_paths_to_image_input(input_path_pair)
             label_json_bunch = self.label_json_path_to_label(label_path)
             batch_images.append(input_image)
